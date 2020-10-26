@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Owners Page</title>
+    <style>
+        body {
+            background-color: coral;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .row {
+            display: flex;
+        }
+
+        /* Create two equal columns that sits next to each other */
+        .column {
+            /*flex: 33%;*/
+            flex-basis: 33%;
+            padding: 10px;
+        }
+
+        #headline{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Add New Owner</h1>
+
+<form method="post" action="/owners/addOwner">
+    Navn:
+    <input type="text" name="firstName"></br>
+
+    <input type="submit" value="Gem">
+</form>
+
+<h2>Dog Owners</h2>
+
+<div th:each="owner : ${owners}">
+    <h3 th:text="${owner.firstName}"></h3>
+
+</div>
+
+</body>
+</html>
