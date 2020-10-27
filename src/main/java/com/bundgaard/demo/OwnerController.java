@@ -24,13 +24,13 @@ public class OwnerController {
     public String dogs(Model model){
 
         model.addAttribute("owners", ownerService.findAll());
-        return "/Owners/owners";
+        return "/Dogs/index";
     }
 
 
     @RequestMapping(value = "/owners/addOwner", method = RequestMethod.POST)
     public String addOwners(Owner owner){
         ownerService.save(owner);
-        return "redirect:/owners";
+        return "redirect:/dogs";
     }
 }

@@ -13,7 +13,7 @@ public class Dog {
     @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "image_url")
     private String imageUrl;
 
     @ManyToOne

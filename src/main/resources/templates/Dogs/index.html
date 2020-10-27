@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dog Page</title>
     <style>
         body {
             background-color: coral;
@@ -28,13 +29,39 @@
 <body>
 
 <h1 id="headline">Dog Home</h1>
+<div>
+    <form method="post" action="/dogs/login" >
+        <input type="text" name="username" placeholder="brugernavn" value="doglover">
+        <input type="text" name="password" placeholder="password" value="vow">
+        <input type="submit" value="Log ind" >
+    </form>
+</div>
+
+<h2 th:if="${session.loginstatus == 'yes'}">Login Ok!</h2>
 
 <div class="row">
     <div class="column" style="background-color:#aaa">
-        <h2>Opret samarit: Navn</h2>
-        <h3>Ole</h3>
-        <h3>Anna</h3>
-        <h3>Jens</h3>
+        <h2>Opret Ejer:</h2>
+        <form method="post" action="/owners/addOwner">
+            Navn:
+            <input type="text" name="firstName"></br>
+            <input type="hidden" name="id">
+            <input type="submit" value="Gem">
+        </form>
+
+        <!--
+                <form action="/dogs/adopt" method="post" th:each="owner : ${owners}">
+                    <input type="text" th:value="${owner.firstName}" name="firstName">
+                    <input type="hidden" th:value="${owner.id}"
+                </form>-->
+
+        <form action="/dogs/adopt" method="post" th:each="owner : ${owners}">
+                    <h3 th:text="${owner.firstName}"></h3>
+                    <select name ="dog">
+                        <option th:each="dog:${ownerlessdogs}" th:value="${dog.id}" th:text="${dog.name}"></option>
+                    </select>
+                    <input type="submit" value="Gem">
+        </form>
     </div>
     <div class="column" style="background-color:#bbb;">
         <h2>Adopter hund</h2>
@@ -48,7 +75,7 @@
         <h4>Hunde</h4>
         <form method="post" action="/dogs/addDog">
             Navn:
-            <input type="text" name="name"></br>
+            <input type="text" name="name">
             Billede url:
             <input type="text" name="imageUrl">
             <select name="owner">
@@ -61,7 +88,8 @@
             <h3 th:text="${dog.name}"></h3>
             <img th:src="${dog.imageUrl}">
         </div>
-
+        <input type="submit" name="frem" value="Tilbage">
+        <input type="submit" name="frem" value="Frem">
     </div>
 </div>
 
